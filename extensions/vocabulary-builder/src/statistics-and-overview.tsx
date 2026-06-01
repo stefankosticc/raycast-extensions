@@ -68,10 +68,10 @@ export default function Command() {
 
                       const timestamp = new Date(parts[0].trim()).getTime();
                       if (isNaN(timestamp)) continue;
-                      const [word, translation] = parts[1]
-                        .trim()
-                        .split(" - ")
-                        .map((s) => s.trim());
+                      const splitIdx = parts[1].trim().indexOf(" - ");
+                      if (splitIdx === -1) continue;
+                      const word = parts[1].trim().slice(0, splitIdx).trim();
+                      const translation = parts[1].trim().slice(splitIdx + 3).trim();
                       if (!word || !translation) continue;
                       try {
                         addEntry(word, translation, selectedLanguageId, timestamp);
