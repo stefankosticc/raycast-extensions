@@ -67,6 +67,7 @@ export default function Command() {
                       if (parts.length < 2) continue;
 
                       const timestamp = new Date(parts[0].trim()).getTime();
+                      if (isNaN(timestamp)) continue;
                       const [word, translation] = parts[1]
                         .trim()
                         .split(" - ")
